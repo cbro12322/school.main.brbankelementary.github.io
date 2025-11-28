@@ -1,10 +1,11 @@
+// main.js
 let qp;
 
 try {
-  qp = window.top.location.pathname === "/rx";
+  qp = window.top.location.pathname === "/d";
 } catch {
   try {
-    qp = window.parent.location.pathname === "/rx";   
+    qp = window.parent.location.pathname === "/d";
   } catch {
     qp = false;
   }
@@ -12,20 +13,14 @@ try {
 
 document.addEventListener("DOMContentLoaded", () => {
   // Blocked Hostnames Check
-  /* const blockedHostnames = [
-    "gointerstellar.app",
-    "computers-science.com",
-    "roundrockisd.online",
-    "algebraxyz.info",
-    "thegalleryofart.info",
-  ];
+  const blockedHostnames = ["gointerstellar.app"];
 
   if (!blockedHostnames.includes(window.location.hostname)) {
     const script = document.createElement("script");
     script.type = "text/javascript";
-    script.src = "//flatjeep.com/5e/6b/27/5e6b2776400180cc548a7dfd8ab3f717.js";
+    script.src = "//nightsclotheshazardous.com/1c/c3/8a/1cc38a6899fdf8ba4dfe779bcc54627b.js";
     document.body.appendChild(script);
-  } */
+  }
 
   const nav = document.querySelector(".f-nav");
 
@@ -40,19 +35,16 @@ document.addEventListener("DOMContentLoaded", () => {
         <a class="icon" href="/./"><img alt="nav" id="INImg" src="${LogoUrl}"/></a>
       </div>
       <div class="f-nav-right">
-        <a class="navbar-link" href="/./up"><i class="fa-solid fa-gamepad navbar-icon"></i><an>&#71;&#97;</an><an>&#109;&#101;&#115;</an></a>
-        <a class="navbar-link" href="/./yz"><i class="fa-solid fa-phone navbar-icon"></i><an>&#65;&#112;</an><an>&#112;&#115;</an></a>
-        ${qp ? "" : '<a class="navbar-link" href="/./rx"><i class="fa-solid fa-laptop navbar-icon"></i><an>&#84;&#97;</an><an>&#98;&#115;</an></a>'}
-        <a class="navbar-link" href="/./vk"><i class="fa-solid fa-gear navbar-icon settings-icon"></i><an>&#83;&#101;&#116;</an><an>&#116;&#105;&#110;&#103;</an></a>
+        <a class="navbar-link" href="/./a"><i class="fa-solid fa-gamepad navbar-icon"></i><an>&#71;&#97;</an><an>&#109;&#101;&#115;</an></a>
+        <a class="navbar-link" href="/./b"><i class="fa-solid fa-phone navbar-icon"></i><an>&#65;&#112;</an><an>&#112;&#115;</an></a>
+        ${qp ? "" : '<a class="navbar-link" href="/./d"><i class="fa-solid fa-laptop navbar-icon"></i><an>&#84;&#97;</an><an>&#98;&#115;</an></a>'}
+        <a class="navbar-link" href="/./c"><i class="fa-solid fa-gear navbar-icon settings-icon"></i><an>&#83;&#101;&#116;</an><an>&#116;&#105;&#110;&#103;</an></a>
       </div>`;
     nav.innerHTML = html;
   }
 
   // LocalStorage Setup for 'dy'
-  if (
-    localStorage.getItem("dy") === null ||
-    localStorage.getItem("dy") === undefined
-  ) {
+  if (localStorage.getItem("dy") === null || localStorage.getItem("dy") === undefined) {
     localStorage.setItem("dy", "false");
   }
 

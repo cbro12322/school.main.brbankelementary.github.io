@@ -1,4 +1,5 @@
 // Ads
+// settings.js
 document.addEventListener("DOMContentLoaded", () => {
   function adChange(selectedValue) {
     if (selectedValue === "default") {
@@ -65,10 +66,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const storedP = localStorage.getItem("uv");
     if (storedP === "true") {
       pChangeElement.value = "uv";
-    } else if (
-      localStorage.getItem("dy") === "true" ||
-      localStorage.getItem("dy") === "auto"
-    ) {
+    } else if (localStorage.getItem("dy") === "true" || localStorage.getItem("dy") === "auto") {
       pChangeElement.value = "dy";
     } else {
       pChangeElement.value = "uv";
@@ -107,15 +105,13 @@ function saveEventKey() {
   localStorage.setItem("eventKey", JSON.stringify(eventKey));
   localStorage.setItem("pLink", pLink);
   localStorage.setItem("eventKeyRaw", eventKeyRaw);
-  // biome-ignore lint/correctness/noSelfAssign:
+  // biome-ignore lint: idk
   window.location = window.location;
 }
 const dropdown = document.getElementById("dropdown");
 const options = dropdown.getElementsByTagName("option");
 
-const sortedOptions = Array.from(options).sort((a, b) =>
-  a.textContent.localeCompare(b.textContent),
-);
+const sortedOptions = Array.from(options).sort((a, b) => a.textContent.localeCompare(b.textContent));
 
 while (dropdown.firstChild) {
   dropdown.removeChild(dropdown.firstChild);
@@ -161,16 +157,16 @@ function ResetCustomCloak() {
 
 function redirectToMainDomain() {
   const currentUrl = window.location.href;
-  const mainDomainUrl = currentUrl.replace(/\/[^\/]*$/, "");
+  const mainDomainUrl = currentUrl.replace(/\/[^/]*$/, "");
   const target = mainDomainUrl + window.location.pathname;
   if (window !== top) {
     try {
-      top.location.href = target
+      top.location.href = target;
     } catch {
       try {
-        parent.location.href = target
+        parent.location.href = target;
       } catch {
-        window.location.href = target
+        window.location.href = target;
       }
     }
   } else window.location.href = mainDomainUrl + window.location.pathname;
@@ -269,9 +265,7 @@ function AB() {
       const link = doc.createElement("link");
 
       const name = localStorage.getItem("name") || "My Drive - Google Drive";
-      const icon =
-        localStorage.getItem("icon") ||
-        "https://ssl.gstatic.com/docs/doclist/images/drive_2022q3_32dp.png";
+      const icon = localStorage.getItem("icon") || "https://ssl.gstatic.com/docs/doclist/images/drive_2022q3_32dp.png";
 
       doc.title = name;
       link.rel = "icon";
@@ -374,18 +368,18 @@ function randRange(min, max) {
 
 function exportSaveData() {
   function getCookies() {
-    let cookies = document.cookie.split('; ');
-    let cookieObj = {};
+    const cookies = document.cookie.split("; ");
+    const cookieObj = {};
     cookies.forEach(cookie => {
-      let [name, value] = cookie.split('=');
+      const [name, value] = cookie.split("=");
       cookieObj[name] = value;
     });
     return cookieObj;
   }
   function getLocalStorage() {
-    let localStorageObj = {};
-    for (let key in localStorage) {
-      if (localStorage.hasOwnProperty(key)) {
+    const localStorageObj = {};
+    for (const key in localStorage) {
+      if (Object.hasOwn(localStorage, key)) {
         localStorageObj[key] = localStorage.getItem(key);
       }
     }
@@ -393,14 +387,14 @@ function exportSaveData() {
   }
   const data = {
     cookies: getCookies(),
-    localStorage: getLocalStorage()
+    localStorage: getLocalStorage(),
   };
   const dataStr = JSON.stringify(data, null, 2);
-  const blob = new Blob([dataStr], { type: 'application/json' });
+  const blob = new Blob([dataStr], { type: "application/json" });
   const url = URL.createObjectURL(blob);
-  const a = document.createElement('a');
+  const a = document.createElement("a");
   a.href = url;
-  a.download = 'save_data.json';
+  a.download = "save_data.json";
   document.body.appendChild(a);
   a.click();
   document.body.removeChild(a);
@@ -408,14 +402,14 @@ function exportSaveData() {
 }
 
 function importSaveData() {
-  const input = document.createElement('input');
-  input.type = 'file';
-  input.accept = 'application/json';
-  input.onchange = function(event) {
+  const input = document.createElement("input");
+  input.type = "file";
+  input.accept = "application/json";
+  input.onchange = event => {
     const file = event.target.files[0];
     if (!file) return;
     const reader = new FileReader();
-    reader.onload = function(e) {
+    reader.onload = e => {
       try {
         const data = JSON.parse(e.target.result);
         if (data.cookies) {
@@ -428,14 +422,13 @@ function importSaveData() {
             localStorage.setItem(key, value);
           });
         }
-        alert('Your save data has been imported. Please test it out.')
-        alert('If you find any issues then report it in GitHub or the Interstellar Discord.')
+        alert("Your save data has been imported. Please test it out.");
+        alert("If you find any issues then report it in GitHub or the Interstellar Discord.");
       } catch (error) {
-        console.error('Error parsing JSON file:', error);
+        console.error("Error parsing JSON file:", error);
       }
     };
     reader.readAsText(file);
   };
   input.click();
 }
-
